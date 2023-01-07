@@ -1,9 +1,14 @@
 import asyncio
 from telethon import TelegramClient, events
+from dotenv import dotenv_values
 
-api_id = 'API_ID'
-api_hash = 'API_HASH'
-group_name = 'F1_Visa_Slots_Only'
+# Load environment variables from .env file
+config = dotenv_values(".env")
+api_id = config['API_ID']
+api_hash = config['API_HASH']
+group_name = config['GROUP_NAME']
+
+user_name = config['USER_NAME']
 
 async def main():
     async with TelegramClient('anon', api_id, api_hash) as client:
@@ -16,7 +21,7 @@ async def main():
 
             if not any(word in message for word in forbidden_words):
                 # Forward the message to another user or group
-                await client.forward_messages('USER_NAME', event.message)
+                await client.forward_messages(user_name, event.message)
 
         await client.run_until_disconnected()
 
