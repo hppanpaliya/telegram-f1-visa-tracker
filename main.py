@@ -20,8 +20,8 @@ async def main():
             forbidden_words = ['no', 'report', 'blocked', 'not', 'na']
 
             if not any(word in message for word in forbidden_words):
-                # Forward the message to another user or group
-                await client.forward_messages(user_name, event.message)
+                # Send the message content to another user or group
+                await client.send_message(user_name, message)
 
         await client.run_until_disconnected()
 
