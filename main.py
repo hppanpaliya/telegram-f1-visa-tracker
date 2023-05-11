@@ -17,7 +17,8 @@ async def main():
         @client.on(events.NewMessage(chats=group_entity))
         async def handler(event):
             message = event.message.message.lower()
-            forbidden_words = ['no', 'report', 'blocked', 'not', 'na','fake','permission','without','Action','Register','follow','free','live','banned','chat','group','video','poll','without','link','tool','tweet','questions','group','chat','discussions','wasted_a_login','login','reschedule','travel','agent','spam','n/a','spammer','block','fresher','buying','things','?','any']
+            print(message)
+            forbidden_words = ['no', 'report', 'blocked', 'not', 'na','fake','permission','without','Action','Register','follow','free','live','banned','chat','group','video','poll','without','link','tool','tweet','questions','group','chat','discussions','wasted_a_login','login','reschedule','travel','agent','spam','n/a','spammer','block','fresher','buying','things','?','any','ok','thank','thanks','you']
 
             if not any(word in message for word in forbidden_words):
                 # Send the message content to another user or group
