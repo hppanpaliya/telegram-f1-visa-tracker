@@ -1,6 +1,8 @@
 import asyncio
 from telethon import TelegramClient, events
 from dotenv import dotenv_values
+import re
+from keywords import forbidden_words
 
 # Load environment variables from .env file
 config = dotenv_values(".env")
@@ -18,10 +20,16 @@ async def main():
         async def handler(event):
             message = event.message.message.lower()
             print(message)
-            forbidden_words = ['no', 'report', 'blocked', 'not', 'na','fake','permission','without','Action','Register','follow','free','live','banned','chat','group','video','poll','without','link','tool','tweet','questions','group','chat','discussions','wasted_a_login','login','reschedule','travel','agent','spam','n/a','spammer','block','fresher','buying','things','?','any','ok','thank','thanks','you']
+            with open('message.txt', 'a') as file:
+                    file.write(message + '\n')
 
-            if not any(word in message for word in forbidden_words):
-                # Send the message content to another user or group
+            # Ignore messages with only emojis
+            if not message or message.strip().startswith(':') or re.match(r'^[\U0001F300-\U0001F6FF\s]+$', message.strip()):
+                return
+
+            # Ignore messages with forbidden words and handle cases without spaces
+            if not any(word in message.split() for word in forbidden_words) and not any(re.search(r'\b{}\b'.format(re.escape(word)), message) for word in forbidden_words):
+                # Save the message content to a file
                 await client.send_message(user_name, message)
 
         await client.run_until_disconnected()
