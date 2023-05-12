@@ -9,5 +9,7 @@ forbidden_words = [
     'error', 'warning', 'need', 'request', 'require', 'looking', 'query', 'info',
     'verify', 'complaint', 'request', 'solution', 'support', 'assistance', 'advise',
     'advise', 'guide', 'suggestion', 'recommendation', 'opinion', 'please',
-    'admin', 'moderator', 'hello', 'hi', 'hey', 'bye', 'goodbye', 'ok', 'cool','dropbox'
+    'admin', 'moderator', 'hello', 'hi', 'hey', 'bye', 'goodbye', 'ok', 'cool','dropbox',
+    'any','idea','ban','kick','before','when','is','past','anyone','password',
+    'novi','nov','/reload','/','??','opened?','genuine','work','pay','can'
 ]

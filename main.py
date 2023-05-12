@@ -21,14 +21,16 @@ async def main():
             message = event.message.message.lower()
             print(message)
             with open('message.txt', 'a') as file:
-                    file.write(message + '\n')
+                file.write(message + '\n')
 
             # Ignore messages with only emojis
             if not message or message.strip().startswith(':') or re.match(r'^[\U0001F300-\U0001F6FF\s]+$', message.strip()):
                 return
 
             # Ignore messages with forbidden words and handle cases without spaces
-            if not any(word in message.split() for word in forbidden_words) and not any(re.search(r'\b{}\b'.format(re.escape(word)), message) for word in forbidden_words):
+            if not any(word in message.split() for word in forbidden_words) and not any(
+                    re.search(r'\b{}\b'.format(re.escape(word)), message) or re.search(r'(?i)\b{}\b'.format(re.escape(word)), message)
+                    for word in forbidden_words):
                 # Save the message content to a file
                 await client.send_message(user_name, message)
 
